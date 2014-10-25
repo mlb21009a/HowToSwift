@@ -28,7 +28,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         self.performSegueWithIdentifier("SecondView", sender: self)
     }
     //overrideしないと怒られる
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue:UIStoryboardSegue, sender: AnyObject!) {
         
         //文字列比較は「==」で良いっぽい
         //Stringはどうやらオブジェクト型ではないようだ
@@ -41,9 +41,9 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
             //destinationViewControllerの戻り値は「AnyObject」になっていた
             //objective-cでいう「id」ってことにしとこう
             //ってかSecondViewControllerインポートしなくてもいいのか？
-            var vc = segue.destinationViewController as SecondViewController
-            vc.delegate = self
-            vc.hoge = array[1]
+            var vc = segue.destinationViewController as? SecondViewController
+            vc!.delegate = self
+            vc!.hoge = array[1]
             
             
             
@@ -64,6 +64,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         println(金)
         
         //今まで通りNSLogも使えるYO
+        //beta7だとここで落ちる
         NSLog("%@", 金)
         
         //NSLogではコンソールには日付とかが一緒に出力されるけど
