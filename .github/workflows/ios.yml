@@ -38,14 +38,15 @@ jobs:
     - name: Run tests
       run: |
         set -o pipefail
-        echo "Available simulators:"
-        xcrun simctl list devices
+        # 利用可能な iPhone 14 シミュレータを自動取得
+        SIM_NAME=$(xcrun simctl list devices available | grep "iPhone 14" | head -n1 | awk -F '[()]' '{print $2}')
+        echo "Using simulator: $SIM_NAME"
         xcodebuild \
           -project HowToSwift.xcodeproj \
           -scheme HowToSwift \
           -configuration Debug \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.0' \
+          -destination "id=$SIM_NAME" \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO \
