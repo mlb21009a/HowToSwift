@@ -17,7 +17,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v2
       with:
-        xcode-version: '26.3'   # 必要に応じて Xcode バージョンを指定
+        xcode-version: '15.2'   # 必要に応じて Xcode バージョンを指定
 
     - name: Verify Xcode & Swift version
       run: |
