@@ -1,4 +1,4 @@
-name: iOS CI
+name: iOS CI (Xcode 26)
 
 on:
   push:
@@ -7,17 +7,16 @@ on:
 
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: macos-26   # macOS 26 Runner を明示的に指定
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Xcode
+    - name: Set up Xcode 26
       uses: maxim-lobanov/setup-xcode@v2
       with:
-        xcode-version: '15.2'   # 必要に応じて Xcode バージョンを指定
+        xcode-version: '26.0.1'   # 利用可能な Xcode 26 系を指定
 
     - name: Verify Xcode & Swift version
       run: |
