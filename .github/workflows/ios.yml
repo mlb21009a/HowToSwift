@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
 
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v2
@@ -37,8 +37,8 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild \
-          -workspace MyApp.xcworkspace \
-          -scheme MyApp \
+          -workspace HowToSwift.xcworkspace \
+          -scheme HowToSwift \
           -configuration Release \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
