@@ -30,6 +30,9 @@ jobs:
           -project HowToSwift.xcodeproj \
           -scheme HowToSwift \
           -configuration Debug \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
           clean build
 
     - name: Run tests
@@ -41,4 +44,7 @@ jobs:
           -configuration Debug \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
           clean test
