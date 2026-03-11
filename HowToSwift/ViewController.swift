@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, SecondViewControllerDelegate{
+class ViewController: UIViewController, @MainActor SecondViewControllerDelegate {
 
     //変数
     var array:[String] = []
@@ -25,11 +25,11 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         //今まであったpsuh,modalとかが非推奨になってた
         //なんか新しいのになってた
         //とりあえず分かんないので適当に指定
-        self.performSegueWithIdentifier("SecondView", sender: self)
+        self.performSegue(withIdentifier: "SecondView", sender: self)
     }
     //overrideしないと怒られる
-    override func prepareForSegue(segue:UIStoryboardSegue, sender: AnyObject!) {
-        
+    override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
+
         //文字列比較は「==」で良いっぽい
         //Stringはどうやらオブジェクト型ではないようだ
         if (segue.identifier == "SecondView") {
@@ -41,7 +41,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
             //destinationViewControllerの戻り値は「AnyObject」になっていた
             //objective-cでいう「id」ってことにしとこう
             //ってかSecondViewControllerインポートしなくてもいいのか？
-            var vc = segue.destinationViewController as? SecondViewController
+            let vc = segue.destination as? SecondViewController
             vc!.delegate = self
             vc!.hoge = array[1]
             
@@ -61,7 +61,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         var 金 = "命より重い!"
         
         //コンソールに出力したい場合はこう「%@」とかいらん
-        println(金)
+        print(金)
         
         //今まで通りNSLogも使えるYO
         //beta7だとここで落ちる
@@ -72,7 +72,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         
         //関数呼び出し
         //selfをつけてもつけなくても大丈夫
-        createLabel(金)
+        createLabel(str: 金)
         
         //letは値変更できませんよ宣言
         //Objective-cだとconstやプロパティのreadOnly属性的位置づけどと勝手に思う今日この頃
@@ -100,7 +100,7 @@ class ViewController: UIViewController, SecondViewControllerDelegate{
         label.backgroundColor = UIColor(red:10.0, green:10.0, blue:10.0, alpha:1.0)
         
         //クラスメソッドの場合はこんな感じでかける
-        label.backgroundColor = UIColor.greenColor()
+        label.backgroundColor = UIColor.green
         
     }
     

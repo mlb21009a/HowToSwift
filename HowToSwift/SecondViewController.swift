@@ -33,18 +33,18 @@ class SecondViewController: UIViewController {
     
     @IBAction func tapBtn(sender: UIButton) {
         
-        self.delegate.hogehoge(hoge)
+        self.delegate.hogehoge(str: hoge)
         
         //戻る時もいままでと同じノリでいける
         // YESではなくtrueになった
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.redColor()
+        self.view.backgroundColor = UIColor.red
         
         label.text = hoge
     }
