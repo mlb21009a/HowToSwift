@@ -58,7 +58,7 @@ class ViewController: UIViewController, @MainActor SecondViewControllerDelegate 
         //変数名は全角でもOKっぽい
         //絵文字もいけるって聞いたけどなんかダメだった
         //文字列には「@」は不要
-        var 金 = "命より重い!"
+        let 金 = "命より重い!"
         
         //コンソールに出力したい場合はこう「%@」とかいらん
         print(金)
