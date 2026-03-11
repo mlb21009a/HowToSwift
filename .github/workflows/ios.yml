@@ -8,25 +8,38 @@ on:
 jobs:
   build:
 
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
+    - name: Checkout repository
     - uses: actions/checkout@v4
 
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode.app
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v2
+      with:
+        xcode-version: '26.3'   # 必要に応じて Xcode バージョンを指定
 
-    - name: Show Xcode version
-      run: xcodebuild -version
+    - name: Verify Xcode & Swift version
+      run: |
+        xcode-select -p
+        swift --version
 
-    - name: Resolve Swift Packages
-      run: xcodebuild -resolvePackageDependencies
-
-    - name: Build
+    - name: Build with xcodebuild
       run: |
         set -o pipefail
         xcodebuild \
+          -workspace HowToSwift.xcworkspace \
           -scheme HowToSwift \
-          -project HowToSwift.xcodeproj \
-          -destination 'platform=iOS Simulator,name=iPhone 15' \
-          build-for-testing
+          -configuration Release \
+          clean build | xcpretty
+
+    - name: Run tests
+      run: |
+        set -o pipefail
+        xcodebuild \
+          -workspace MyApp.xcworkspace \
+          -scheme MyApp \
+          -configuration Release \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          clean test | xcpretty
