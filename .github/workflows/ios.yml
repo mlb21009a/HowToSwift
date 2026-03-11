@@ -27,7 +27,7 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild \
-          -workspace HowToSwift.xcworkspace \
+          -project HowToSwift.xcodeproj \
           -scheme HowToSwift \
           -configuration Release \
           clean build | xcpretty
@@ -36,7 +36,7 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild \
-          -workspace HowToSwift.xcworkspace \
+          -project HowToSwift.xcodeproj \
           -scheme HowToSwift \
           -configuration Release \
           -sdk iphonesimulator \
